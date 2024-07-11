@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Задача: {{ task.name }}</h1>
+    <p>Описание: {{task.description}}</p>
+    <p>Дата выполнения: {{task.due_date}}</p>
+    <a class="btn btn-secondary" href="{% url 'task_edit' task.pk %}">Редактировать</a>
+    <a href="{% url 'task_delete' task.pk %}">Удалить</a>
+{% endblock %}

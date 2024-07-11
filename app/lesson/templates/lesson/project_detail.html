@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Проект: {{ project.name }}</h1>
+    <p>Описание: {{project.description}}</p>
+    <p>Старт: {{project.start_date}}</p>
+    <p>Окончание: {{project.end_date}}</p>
+    <a class="btn btn-secondary" href="{% url 'project_edit' project.pk %}">Редактировать</a>
+    <a href="{% url 'project_delete' project.pk %}">Удалить</a>
+    <h2>Участники:</h2>
+    <a class="btn btn-primary" href="{% url 'project_add_members' project.pk %}" >Добавить участника</a>
+
+    {% for user in project.members.all %}
+        <li>
+            {{user.username}}
+            <a class="btn btn-danger" href="{% url 'project_delete_member' project.pk user.pk %}">Удалить участника</a>
+        </li>
+        
+    {% endfor %}
+
+    <h2>Задачи:</h2>
+    <a class="btn btn-primary" href="{% url 'task_create' project.pk %}" >Создать задачу</a>
+    <ul>
+        {% for task in project.tasks.all %}
+        <li>
+            <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{% if form.instance.pk %}Изменить задачу{% else %}Создать задачу{% endif %}</h1>
+<form  method="post">
+    {% csrf_token %}
+    <div>Название задачи: {{ form.title }}</div>
+    <div>Описание задачи: {{ form.description }}</div>
+    <div>Дата окончания задачи: {{ form.due_date }}</div>
+    <div>Статус задачи: {{ form.status }}</div>
+    <div>Приоритет задачи: {{ form.priority }}</div>
+    <div>Исполнитель: {{ form.assigned_to }}</div>
+    <button type="submit", class="btn btn-primary">Сохранить задачу</button>
+</form>
+
+<a href="{% url 'project_detail' project.pk %}">Отмена</a>
+{% endblock %}
